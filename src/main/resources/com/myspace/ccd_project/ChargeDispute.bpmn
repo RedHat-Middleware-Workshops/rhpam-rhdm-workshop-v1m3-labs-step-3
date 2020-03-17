@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_YWDPYFcMEeqDKcJ-WAcI2Q" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_caseFile_customerStatusItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_caseFile_totalFraudAmountItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_caseFile_fraudDataItem" structureRef="com.myspace.ccd_project.FraudData"/>
+  <bpmn2:itemDefinition id="_caseFile_approvedChargebackItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_caseFile_customerAgeItem" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_caseFile_incidentCountItem" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_caseFile_creditCardHolderItem" structureRef="com.myspace.ccd_project.CreditCardHolder"/>
+  <bpmn2:itemDefinition id="_caseFile_managerApprovalItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_caseFile_managerReasonItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_caseFile_customerDocCompletedItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_caseFile_vendorDocCompletedItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_caseFile_vendorDocItem" structureRef="org.jbpm.document.Document"/>
+  <bpmn2:itemDefinition id="_caseFile_customerDocItem" structureRef="org.jbpm.document.Document"/>
+  <bpmn2:itemDefinition id="_caseFile_vendorDocRequiredItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_caseFile_managerApprovalReasonItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_caseFile_caseTypeItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputXItem" structureRef="String"/>
+  <bpmn2:signal id="_25269073-df16-31f7-941e-379c5ba44069" name="Dispute received"/>
+  <bpmn2:process id="src.ChargeDispute" drools:packageName="com.myspace.ccd_project" drools:version="1.0" drools:adHoc="true" name="ChargeDispute" isExecutable="true">
+    <bpmn2:extensionElements>
+      <drools:metaData name="customCaseIdPrefix">
+        <drools:metaValue><![CDATA[CASE]]></drools:metaValue>
+      </drools:metaData>
+      <drools:metaData name="customCaseRoles">
+        <drools:metaValue><![CDATA[owner:1,approval-manager:1]]></drools:metaValue>
+      </drools:metaData>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="caseFile_customerStatus" itemSubjectRef="_caseFile_customerStatusItem" name="caseFile_customerStatus"/>
+    <bpmn2:property id="caseFile_totalFraudAmount" itemSubjectRef="_caseFile_totalFraudAmountItem" name="caseFile_totalFraudAmount"/>
+    <bpmn2:property id="caseFile_fraudData" itemSubjectRef="_caseFile_fraudDataItem" name="caseFile_fraudData"/>
+    <bpmn2:property id="caseFile_approvedChargeback" itemSubjectRef="_caseFile_approvedChargebackItem" name="caseFile_approvedChargeback"/>
+    <bpmn2:property id="caseFile_customerAge" itemSubjectRef="_caseFile_customerAgeItem" name="caseFile_customerAge"/>
+    <bpmn2:property id="caseFile_incidentCount" itemSubjectRef="_caseFile_incidentCountItem" name="caseFile_incidentCount"/>
+    <bpmn2:property id="caseFile_creditCardHolder" itemSubjectRef="_caseFile_creditCardHolderItem" name="caseFile_creditCardHolder"/>
+    <bpmn2:property id="caseFile_managerApproval" itemSubjectRef="_caseFile_managerApprovalItem" name="caseFile_managerApproval"/>
+    <bpmn2:property id="caseFile_managerReason" itemSubjectRef="_caseFile_managerReasonItem" name="caseFile_managerReason"/>
+    <bpmn2:property id="caseFile_customerDocCompleted" itemSubjectRef="_caseFile_customerDocCompletedItem" name="caseFile_customerDocCompleted"/>
+    <bpmn2:property id="caseFile_vendorDocCompleted" itemSubjectRef="_caseFile_vendorDocCompletedItem" name="caseFile_vendorDocCompleted"/>
+    <bpmn2:property id="caseFile_vendorDoc" itemSubjectRef="_caseFile_vendorDocItem" name="caseFile_vendorDoc"/>
+    <bpmn2:property id="caseFile_customerDoc" itemSubjectRef="_caseFile_customerDocItem" name="caseFile_customerDoc"/>
+    <bpmn2:property id="caseFile_vendorDocRequired" itemSubjectRef="_caseFile_vendorDocRequiredItem" name="caseFile_vendorDocRequired"/>
+    <bpmn2:property id="caseFile_managerApprovalReason" itemSubjectRef="_caseFile_managerApprovalReasonItem" name="caseFile_managerApprovalReason"/>
+    <bpmn2:property id="caseFile_caseType" itemSubjectRef="_caseFile_caseTypeItem" name="caseFile_caseType"/>
+    <bpmn2:sequenceFlow id="_69E6F507-EF13-42B7-BDBE-7551B0BB5542" sourceRef="_190A4156-2EB5-4543-81E0-C2353C374EBB" targetRef="_3EA6567B-1854-489B-A102-BD7B5ED4516D"/>
+    <bpmn2:endEvent id="_3EA6567B-1854-489B-A102-BD7B5ED4516D">
+      <bpmn2:incoming>_69E6F507-EF13-42B7-BDBE-7551B0BB5542</bpmn2:incoming>
+      <bpmn2:signalEventDefinition id="_YWDPYVcMEeqDKcJ-WAcI2Q" signalRef="_25269073-df16-31f7-941e-379c5ba44069"/>
+    </bpmn2:endEvent>
+    <bpmn2:scriptTask id="_190A4156-2EB5-4543-81E0-C2353C374EBB" name="Log Case Started" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Log Case Started]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="customAutoStart">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>_69E6F507-EF13-42B7-BDBE-7551B0BB5542</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[System.out.println("Case started");]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:task id="_E30E2511-76BF-420E-AF14-74AAE034A6BA" drools:taskName="Milestone" name="Dispute received">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Dispute received]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="customAutoStart">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:ioSpecification id="_YWDPYlcMEeqDKcJ-WAcI2Q">
+        <bpmn2:dataInput id="_E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputX" drools:dtype="String" itemSubjectRef="__E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputXItem" name="Condition"/>
+        <bpmn2:dataInput id="_E30E2511-76BF-420E-AF14-74AAE034A6BA_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
+        <bpmn2:inputSet id="_YWDPY1cMEeqDKcJ-WAcI2Q">
+          <bpmn2:dataInputRefs>_E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_E30E2511-76BF-420E-AF14-74AAE034A6BA_TaskNameInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_YWDPZFcMEeqDKcJ-WAcI2Q">
+        <bpmn2:targetRef>_E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_YWDPZVcMEeqDKcJ-WAcI2Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YWDPZlcMEeqDKcJ-WAcI2Q"><![CDATA[]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_YWDPZ1cMEeqDKcJ-WAcI2Q">_E30E2511-76BF-420E-AF14-74AAE034A6BA_ConditionInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_YWDPaFcMEeqDKcJ-WAcI2Q">
+        <bpmn2:targetRef>_E30E2511-76BF-420E-AF14-74AAE034A6BA_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_YWDPaVcMEeqDKcJ-WAcI2Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_YWDPalcMEeqDKcJ-WAcI2Q"><![CDATA[Milestone]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_YWDPa1cMEeqDKcJ-WAcI2Q">_E30E2511-76BF-420E-AF14-74AAE034A6BA_TaskNameInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_YWDPbFcMEeqDKcJ-WAcI2Q">
+    <bpmndi:BPMNPlane id="_YWDPbVcMEeqDKcJ-WAcI2Q" bpmnElement="src.ChargeDispute">
+      <bpmndi:BPMNShape id="shape__E30E2511-76BF-420E-AF14-74AAE034A6BA" bpmnElement="_E30E2511-76BF-420E-AF14-74AAE034A6BA">
+        <dc:Bounds height="84.0" width="154.0" x="247.0" y="238.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__190A4156-2EB5-4543-81E0-C2353C374EBB" bpmnElement="_190A4156-2EB5-4543-81E0-C2353C374EBB">
+        <dc:Bounds height="82.0" width="138.0" x="217.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__3EA6567B-1854-489B-A102-BD7B5ED4516D" bpmnElement="_3EA6567B-1854-489B-A102-BD7B5ED4516D">
+        <dc:Bounds height="56.0" width="56.0" x="397.0" y="108.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__190A4156-2EB5-4543-81E0-C2353C374EBB_to_shape__3EA6567B-1854-489B-A102-BD7B5ED4516D" bpmnElement="_69E6F507-EF13-42B7-BDBE-7551B0BB5542">
+        <di:waypoint xsi:type="dc:Point" x="286.0" y="134.0"/>
+        <di:waypoint xsi:type="dc:Point" x="411.0" y="122.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_YWDPblcMEeqDKcJ-WAcI2Q" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E30E2511-76BF-420E-AF14-74AAE034A6BA" id="_YWDPb1cMEeqDKcJ-WAcI2Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_190A4156-2EB5-4543-81E0-C2353C374EBB" id="_YWDPcFcMEeqDKcJ-WAcI2Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_YWDPYFcMEeqDKcJ-WAcI2Q</bpmn2:source>
+    <bpmn2:target>_YWDPYFcMEeqDKcJ-WAcI2Q</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
